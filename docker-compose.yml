@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  # PostgreSQL + PostGIS データベース
+  postgres:
+    image: postgis/postgis:15-3.3
+    container_name: food_loss_postgres
+    environment:
+      POSTGRES_DB: food_loss_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - food_loss_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d food_loss_db"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Spring Boot バックエンド
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: food_loss_backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/food_loss_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      JWT_SECRET: your-super-secret-jwt-key-here-make-it-long-and-secure
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./uploads:/app/uploads
+    networks:
+      - food_loss_network
+    restart: unless-stopped
+
+  # Redis（セッション管理・キャッシュ用）
+  redis:
+    image: redis:7-alpine
+    container_name: food_loss_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - food_loss_network
+    restart: unless-stopped
+
+  # pgAdmin（データベース管理用）
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: food_loss_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@foodloss.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - food_loss_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  food_loss_network:
+    driver: bridge

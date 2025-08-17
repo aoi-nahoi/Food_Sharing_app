@@ -1,0 +1,6 @@
+/home/sota_sato/Development/food_loss_app/backend/src/main/java/com/foodloss/FoodLossApplication.java
+/home/sota_sato/Development/food_loss_app/backend/src/main/java/com/foodloss/entity/Store.java
+/home/sota_sato/Development/food_loss_app/backend/src/main/java/com/foodloss/entity/Order.java
+/home/sota_sato/Development/food_loss_app/backend/src/main/java/com/foodloss/entity/CartItem.java
+/home/sota_sato/Development/food_loss_app/backend/src/main/java/com/foodloss/entity/BaseEntity.java
+/home/sota_sato/Development/food_loss_app/backend/src/main/java/com/foodloss/entity/User.java

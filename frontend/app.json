@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "フードロス削減アプリ",
+    "slug": "food-loss-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.foodloss.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.foodloss.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "このアプリは位置情報を使用して近くのお店を検索します。"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "このアプリは写真を撮影して食品を掲載するためにカメラへのアクセスが必要です。"
+        }
+      ]
+    ]
+  }
+}

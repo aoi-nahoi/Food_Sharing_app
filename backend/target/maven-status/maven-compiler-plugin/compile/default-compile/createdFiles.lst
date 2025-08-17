@@ -1,0 +1,7 @@
+com/foodloss/entity/Store.class
+com/foodloss/FoodLossApplication.class
+com/foodloss/entity/Order.class
+com/foodloss/entity/BaseEntity.class
+com/foodloss/entity/CartItem.class
+com/foodloss/entity/User$UserRole.class
+com/foodloss/entity/User.class
