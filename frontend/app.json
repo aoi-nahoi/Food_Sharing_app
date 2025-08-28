@@ -4,13 +4,7 @@
     "slug": "food-loss-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -19,14 +13,7 @@
       "bundleIdentifier": "com.foodloss.app"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
       "package": "com.foodloss.app"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     },
     "plugins": [
       [
@@ -41,6 +28,7 @@
           "photosPermission": "このアプリは写真を撮影して食品を掲載するためにカメラへのアクセスが必要です。"
         }
       ]
-    ]
+    ],
+    "platforms": ["ios", "android", "web"]
   }
 }

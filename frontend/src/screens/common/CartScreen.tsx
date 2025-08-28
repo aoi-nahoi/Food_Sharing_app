@@ -189,7 +189,7 @@ export default function CartScreen({ navigation }: CartScreenProps) {
       <Image
         source={{ uri: item.imageUrl }}
         style={styles.itemImage}
-        defaultSource={require('../../../assets/placeholder-food.png')}
+                        defaultSource={{ uri: 'https://via.placeholder.com/80x80/cccccc/666666?text=Food' }}
       />
       
       <View style={styles.itemInfo}>

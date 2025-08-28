@@ -3,9 +3,9 @@ spring:
     name: food-loss-app
   
   datasource:
-    url: jdbc:postgresql://localhost:5432/food_loss_db
-    username: postgres
-    password: password
+    url: jdbc:postgresql://localhost:5432/soundlink_db
+    username: soundlink
+    password: soundlink_password
     driver-class-name: org.postgresql.Driver
   
   jpa:
@@ -72,9 +72,9 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    url: jdbc:postgresql://localhost:5432/food_loss_db_dev
-    username: postgres
-    password: password
+    url: jdbc:postgresql://localhost:5432/soundlink_db
+    username: soundlink
+    password: soundlink_password
 
 ---
 spring:

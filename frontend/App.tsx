@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider } from 'react-redux';
 import { store } from './src/store/store';
 import { StatusBar } from 'expo-status-bar';
+import { Text } from 'react-native';
 
 // 認証画面
 import LoginScreen from './src/screens/auth/LoginScreen';
@@ -128,15 +129,35 @@ function StoreTabNavigator() {
 
 // タブアイコンコンポーネント
 function TabBarIcon({ name, color, size }: { name: string; color: string; size: number }) {
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'home':
+        return '🏠';
+      case 'map':
+        return '🗺️';
+      case 'restaurant':
+        return '🍽️';
+      case 'person':
+        return '👤';
+      case 'store':
+        return '🏪';
+      case 'add-circle':
+        return '➕';
+      case 'business':
+        return '🏢';
+      default:
+        return '📱';
+    }
+  };
+
   return (
-    <Text style={{ color, fontSize: size }}>
-      {name === 'home' && '🏠'}
-      {name === 'map' && '🗺️'}
-      {name === 'restaurant' && '🍽️'}
-      {name === 'person' && '👤'}
-      {name === 'store' && '🏪'}
-      {name === 'add-circle' && '➕'}
-      {name === 'business' && '🏢'}
+    <Text style={{ 
+      color, 
+      fontSize: size * 0.8,
+      textAlign: 'center',
+      lineHeight: size
+    }}>
+      {getIcon(name)}
     </Text>
   );
 }
@@ -164,8 +185,3 @@ export default function App() {
     </Provider>
   );
 }
-
-// 一時的なTextコンポーネント（後でreact-native-elementsに置き換え）
-const Text = ({ children, style }: { children: React.ReactNode; style?: any }) => (
-  <span style={style}>{children}</span>
-);

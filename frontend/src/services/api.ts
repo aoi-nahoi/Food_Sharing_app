@@ -1,13 +1,11 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
-
-// APIのベースURL
-const API_BASE_URL = 'http://localhost:8080/api';
+import { API_BASE_URL, API_TIMEOUT } from '../config';
 
 // Axiosインスタンスの作成
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000,
+  timeout: API_TIMEOUT,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -16,13 +14,18 @@ const api = axios.create({
 // リクエストインターセプター（トークンの自動付与）
 api.interceptors.request.use(
   async (config) => {
-    const token = await SecureStore.getItemAsync('authToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    try {
+      const token = await SecureStore.getItemAsync('authToken');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    } catch (error) {
+      console.error('トークン取得エラー:', error);
     }
     return config;
   },
   (error) => {
+    console.error('リクエストエラー:', error);
     return Promise.reject(error);
   }
 );
@@ -31,11 +34,18 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
+    console.error('API レスポンスエラー:', error.response?.status, error.response?.data);
+    
     if (error.response?.status === 401) {
       // トークンが無効な場合、ログアウト処理
-      await SecureStore.deleteItemAsync('authToken');
-      // ここでログイン画面にリダイレクトする処理を追加
+      try {
+        await SecureStore.deleteItemAsync('authToken');
+        // ここでログイン画面にリダイレクトする処理を追加
+      } catch (secureStoreError) {
+        console.error('SecureStore削除エラー:', secureStoreError);
+      }
     }
+    
     return Promise.reject(error);
   }
 );

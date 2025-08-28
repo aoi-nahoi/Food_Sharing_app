@@ -186,7 +186,7 @@ export default function HomeScreen() {
                   <Image
                     source={{ uri: food.imageUrl }}
                     style={styles.foodImage}
-                    defaultSource={require('../../../assets/placeholder-food.png')}
+                    defaultSource={{ uri: 'https://via.placeholder.com/200x150/cccccc/666666?text=Food' }}
                   />
                   <View style={styles.foodInfo}>
                     <Text style={styles.foodName} numberOfLines={2}>

@@ -171,7 +171,7 @@ export default function FoodDetailScreen({ navigation }: FoodDetailScreenProps) 
           <Image
             source={{ uri: selectedFood.imageUrl }}
             style={styles.foodImage}
-            defaultSource={require('../../../assets/placeholder-food.png')}
+                            defaultSource={{ uri: 'https://via.placeholder.com/300x200/cccccc/666666?text=Food' }}
           />
           <View style={styles.imageOverlay}>
             <View style={styles.expiryBadge}>

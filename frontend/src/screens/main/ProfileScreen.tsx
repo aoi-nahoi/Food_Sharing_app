@@ -140,7 +140,7 @@ export default function ProfileScreen({ navigation }: ProfileScreenProps) {
               source={
                 user?.avatar
                   ? { uri: user.avatar }
-                  : require('../../../assets/default-avatar.png')
+                  : { uri: 'https://via.placeholder.com/100x100/cccccc/666666?text=AV' }
               }
               style={styles.avatar}
             />

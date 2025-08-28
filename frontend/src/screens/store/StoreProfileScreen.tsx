@@ -192,7 +192,7 @@ export default function StoreProfileScreen({ navigation }: StoreProfileScreenPro
           <Image
             source={{ uri: storeProfile.imageUrl }}
             style={styles.storeImage}
-            defaultSource={require('../../../assets/placeholder-store.png')}
+                            defaultSource={{ uri: 'https://via.placeholder.com/200x150/cccccc/666666?text=Store' }}
           />
         </View>
 
